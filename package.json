@@ -1,0 +1,25 @@
+{
+  "name": "readmegen",
+  "version": "1.0.0",
+  "description": "README.md generator, which takes user inpthe user's project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PuppetAJ/09-READMEGen-AJ.git"
+  },
+  "keywords": [
+    "async"
+  ],
+  "author": "Adrian Jimenez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PuppetAJ/09-READMEGen-AJ/issues"
+  },
+  "homepage": "https://github.com/PuppetAJ/09-READMEGen-AJ#readme",
+  "dependencies": {
+    "inquirer": "^9.1.1"
+  }
+}
