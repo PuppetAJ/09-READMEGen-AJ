@@ -1,37 +1,19 @@
-// info about application repository
-// title, 
-// description, 
-// table of contents, 
-// installation, 
-// usage, 
-// license, 
-// contributing, 
-// tests, 
-// questions 
-// sections
-// title of project must be the same as the title of readme
-// info is added to appropriate sections
-// license must be chosen from a list of options and a badge must be applied to readme
-// when entering github username a link to the github profile must be in questions
-// same with email ^^
-// table of contents must work
+/* TO DO: 
+- COMMENT CODE 
+- Create Walkthrough video 
+*/
 
-
-// ===
-// prompts
-// ===
-// Installation instructions
-// Usage information
-// Contribution guidelines
-// test instructions
-
-// Index.js handles prompts
-
-// write tests?
-
+const { writeFile } = require('./utils/generate-file.js');
+const generateTxt = require('./src/template.js');
 const inquirer = require('inquirer');
 
 const promptUser = () => {
+
+        console.log(`
+        ==========
+        Basic Info
+        ==========
+        `);
 
     return inquirer.prompt([
         {
@@ -57,6 +39,18 @@ const promptUser = () => {
                     return true;
                 } else {
                     console.log("Please enter a username!");
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Please enter your email.',
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                } else {
+                    console.log("Please enter an email!");
                 }
             }
         },
@@ -90,7 +84,7 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'usage',
-            message: 'Please provide usage instructions for your project',
+            message: 'Please provide usage instructions for your project.',
             validate: useInput => {
                 if (useInput) {
                     return true;
@@ -102,9 +96,16 @@ const promptUser = () => {
 
         },
         {
+            type: 'checkbox',
+            name: 'languages',
+            message: 'Please select all languages / technologies used in this project.',
+            choices:["HTML", "CSS", "JavaScript", "Node.JS", "Bootstrap", "Jquery"]
+
+        },
+        {
             type: 'confirm',
             name: 'contributionConfirm',
-            message: 'Would you like to use contributor covenant contribution guidelines?',
+            message: 'Would you like to use contributor covenant contribution guidelines for your project?',
             default: true
         },
         {
@@ -152,6 +153,25 @@ const promptUser = () => {
                     return false;
                 }
             }
+        },
+        {
+            type: 'rawlist',
+            name: 'license',
+            message: 'Please select a license for your project.',
+            choices: [
+                {value: 0, name: "Apache License 2.0"},
+                {value: 1, name: "GNU General Public License v3.0"},
+                {value: 2, name: "MIT License"},
+                {value: 3, name: 'BSD 2-Clause "Simplified" License'},
+                {value: 4, name:  'BSD 3-Clause "New" or "Revised" License'},
+                {value: 5, name: 'Boost Software License 1.0'},
+                {value: 6, name: 'Creative Commons Zero v1.0 Universal'},
+                {value: 7, name: 'Eclipse Public License 2.0'},
+                {value: 8, name: 'GNU General Public License v2.0'},
+                {value: 9, name: 'GNU Lesser General Public License v2.1'},
+                {value: 10, name: 'Mozilla Public License 2.0'},
+                {value: 11, name: 'The Unlicense'}
+            ]
         }  
     ])
 };
@@ -208,13 +228,16 @@ const promptImg = promptData => {
             }
 
         ]).then(imgData => {
-            promptData.images.push(imgData.imgInput);
-            i++;
-            console.log(i);
-            if (imgData.moreImg) {
-                return promptImg(promptData);
+            if (imgData.imgConfirm) {
+                promptData.images.push(imgData.imgInput);
+                i++;
+                if (imgData.moreImg) {
+                    return promptImg(promptData);
+                } else {
+                    return promptData;
+                }
             } else {
-                return promptData;
+                return promptData
             }
         })
     
@@ -300,10 +323,14 @@ const promptVid = promptData => {
             }
 
         ]).then(vidData => {
-            promptData.videos.push(vidData.vidInput);
-            i++;
-            if (vidData.moreVid) {
-                return promptVid(promptData);
+            if (vidData.vidConfirm) {
+                promptData.videos.push(vidData.vidInput);
+                i++;
+                if (vidData.moreVid) {
+                    return promptVid(promptData);
+                } else {
+                    return promptData;
+                }
             } else {
                 return promptData;
             }
@@ -316,14 +343,14 @@ const promptVid = promptData => {
             {
                 type: 'input',
                 name: 'vidInput',
-                message: 'Please provide a path or link to your image.',
+                message: 'Please provide a path or link to your video.',
             
             },
 
             {
                 type: 'confirm',
                 name: 'moreVid',
-                message: 'Would you like to add another image?',
+                message: 'Would you like to add another video?',
                 default: false
             }
 
@@ -338,9 +365,86 @@ const promptVid = promptData => {
     }
 };
 
+const promptAuthors = promptData => {
+
+    if (!promptData.authors) {
+        promptData.authors = [];
+        var i = 0;
+    }
+
+    if (i === 0) {
+
+        console.log(`
+        ===========
+        Add Credits
+        ===========
+        `);
+
+        return inquirer.prompt([
+
+            {
+                type: 'input',
+                name: 'authInput',
+                message: 'Please provide an author/contributor for your project',
+            },
+
+            {
+                type: 'confirm',
+                name: 'moreAuth',
+                message: 'Would you like to add more credits?',
+                default: false,
+            }
+
+        ]).then(authData => {
+            promptData.authors.push(authData.authInput);
+            i++;
+            if (authData.moreAuth) {
+                return promptAuthors(promptData);
+            } else {
+                return promptData;
+            }
+        })
+    
+    } else {
+
+        return inquirer.prompt([ 
+
+            {
+                type: 'input',
+                name: 'authInput',
+                message: 'Please provide an author/contributor for your project',
+            },
+
+            {
+                type: 'confirm',
+                name: 'moreAuth',
+                message: 'Would you like to add more credits?',
+                default: false,
+            }
+
+        ]).then(authData => {
+            promptData.authors.push(authData.authInput);
+            if (authData.moreAuth) {
+                return promptAuthors(promptData);
+            } else {
+                return promptData;
+            }
+        })
+
+    }
+};
+
 promptUser()
     .then(promptImg)
     .then(promptVid)
-    .then(data => {
-        console.log(data);
+    .then(promptAuthors)
+    .then(promptData => {
+        return generateTxt(promptData);
+    })
+    .then(txtData => {
+        return writeFile(txtData);
+    }).then(writeFileResponse => {
+        console.log(writeFileResponse.message);
+    }).catch(err => {
+        console.log(err);
     });
