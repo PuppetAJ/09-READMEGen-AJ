@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/PuppetAJ/09-READMEGen-AJ#readme",
   "dependencies": {
-    "inquirer": "^9.1.1"
+    "inquirer": "^8.2.4"
   }
 }
