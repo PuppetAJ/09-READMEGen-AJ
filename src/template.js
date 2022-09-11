@@ -1,3 +1,4 @@
+// Imports functions from license.md.
 const {
     generateLicense1, 
     generateLicense2, 
@@ -13,29 +14,40 @@ const {
     generateLicense12,
     generateLicense13
 } = require ('./licenses.js');
+// Imports file system functionality.
 const fs = require('fs');
 
+// ***NOTE: THERE IS A GENERAL LACK OF INDENTATION IN THIS DOCUMENT DUE TO HOW POORLY TEMPLATE LITERALS GENERATE WHEN INDENTED.
+
+// Logic for generating the tests section
 const generateTests = (testConfirm, testTxt) => {
 
+// If the user confirms the need for a test section, then return it with the text in place.
 if (testConfirm) {
 return `
 ## Tests
 ${testTxt}
 `
+// Otherwise, return an empty string.
 } else {
     return '';
 }
 
 };
 
+// Logic for generating the images section
 const generateImages = imgArr => {
 
+    // If the image array is empty, return
     if (imgArr === []) {
 
         return;
 
+    // Otherwise, 
     } else {
 
+        // Create a new array consisting of each element formatted how we want it to be displayed in the readme
+        // Then join those elements into a string we can use, complete with line breaks.
         return imgArr.map(img => {
             return (`![](${img})\n`);
         }).join('');
@@ -44,43 +56,61 @@ const generateImages = imgArr => {
 
 };
 
+// Logic for generating the videos section
 const generateVideos = vidArr => {
 
+    // If the videos array is empty, return
     if (vidArr === []) {
         return;
+    // Otherwise, 
     } else {
+        // Create a new array consisting of each element formatted how we want it to be displayed in the readme
+        // Then join those elements into a string we can use, complete with line breaks.
+
+        // We use the i variable to denote which video in the list we're on in the text.
         let i = 0;
         return vidArr.map(vid => {
             i++;
             return (`* [See Video ${i}:](${vid})\n`);
         }).join('');
     }
-}
+};
 
+// Logic for generating the contribution section
 const generateContribution = (confirm, data) => {
 
+// If the user confirms they want to use contributor covenant guidelines, we return that as text.
 if (confirm) {
 return `
 ![](https://img.shields.io/badge/Contribution-CC%20v2.1-blueviolet)\n
 
 This project follows the contributor covenant contribution guidelines. See [here](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) 
 `
+// Otherwise, we take the user's inputted text and format it, then return it.
 } else {
     return `${data}`
 }
 
-}
+};
 
+// Logic for generating the authors section
 const generateAuthors = authors => {
 
+    // Creates a new array with each element formatted into a string. 
+    // Then we join the array into one string and return it.
     return authors.map(author => {
         return (`* ${author}\n`);
     }).join('');
 
 };
 
-
+// Logic for generating LICENSE.md
 const generateLicense = (licenseID, name) => {
+
+// Switch statement which checks for the ID of the license (0-12)
+
+// For each case, we use our generateLicense#() functions from licenses.js to generate the appropriate into our file.
+// Then we write the file using fs.writeFile, and add an arrow function to handle errors.
 
 switch(licenseID) {
 case 0:
@@ -296,7 +326,12 @@ This project is licensed under The Unlicense. See [LICENSE.md](./LICENSE.md) for
 
 };
 
+// Logic for generating license badges.
 const licenseBadge = (licenseID) => {
+
+// Switch statement which accepts the ID of the license (0-12)
+
+// In each case, we return a link to a badge of the appropriate license.
 switch(licenseID) {
 
 case 0:
@@ -367,14 +402,19 @@ return `
 }
 };
 
+// Logic for generating the languages section.
 const generateLanguages = langArr => {
 
+    // Creates a new array each element formatted as a template literal.
+    // Joins all elements into one string and then returns it.
     return langArr.map(lang => {
         return (`* ${lang}\n`);
     }).join('');
 
 };
 
+// Exports the markdown for readme, filling in sections using our previous functions.
+// Exported function uses userData as an argument, which we deconstruct to pass through our functions in this document.
 module.exports = userData => {
 
 const { title, github, description, installation, usage, contribution, contributionConfirm, images, videos, tests, authors, license, testConfirm, email, languages } = userData;

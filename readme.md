@@ -1,68 +1,67 @@
-# <Your-Project-Title>
+# README.md Generator Challenge
+
+
+![](https://img.shields.io/badge/License-MIT-green)
+
 
 ## Description
+> README.md generated using this generator!
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+This is Adrian Jimenez's module 9 README.md generator challenge submission. 
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+I started this project off by first overviewing my knowledge over node.js, and initializing the project with the modules and files I wanted in their proper places. I created an index.js file to host the primary javascript and separated the rest of the functions into separate files for readability. I then proceeded to construct the prompts I wanted the user to see in index.js as separate functions, and imported functions from template.js to format the responses I got from the user into markdown for the README. Once that was complete, I used the file system module from node.js to write a readme file with the formatted text content I'd recieved.
 
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
+## Table of Contents
 
 - [Installation](#installation)
+- [Languages](#languages)
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
+- [Contributing](#contributing)
+- [Questions](#questions)
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+In order to install this project, please download all files and have node.js installed on your machine. Navigate to the directory which index.js is stored in and type npm install. Once all dependencies have been downloaded, you can execute index.js by typing node index.js.
+
+## Languages
+
+* JavaScript
+* Node.JS
+
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+![](./src/images/demo.PNG)
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+* [See Video 1:](https://www.youtube.com/watch?v=ENrzD9HAZK4)
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+In order to use this project, start by calling the index.js file using node index.js. Once this is done, you should be prompted with questions to fill out in the terminal. Fill these questions out as thoroughly as possible, and once all questions have been answered a LICENSE.md and README.md should be generated in the dist folder contained in the package.
+
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
+* Adrian Jimenez
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
 
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+
+This project is licensed under the MIT License. See [LICENSE.md](./LICENSE.md) for more details.
 
 ---
 
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+## Contributing
 
-## Badges
 
-![](https://img.shields.io/github/languages/top/lernantino/badmath)
-![](https://img.shields.io/badge/License-Apache%202.0-yellow)
+![](https://img.shields.io/badge/Contribution-CC%20v2.1-blueviolet)
 
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
 
-## Features
+This project follows the contributor covenant contribution guidelines. See [here](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) 
 
-If your project has a lot of features, list them here.
 
-## How to Contribute
+## Questions
 
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+If you have any questions or concerns visit my [github](https://github.com/PuppetAJ) or send me an email at <adrianjimenez1950@gmail.com>. 
 
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.

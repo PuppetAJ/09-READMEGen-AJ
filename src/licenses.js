@@ -1,4 +1,10 @@
+// Gets the date and assigns it to a global variable for later reference
 var date = new Date();
+
+// All functions in this document are for generating a different license. The license generated is commonted above the functions. 
+// There is a general lack of indentation due to the way template literals display based on indentation.
+
+// Functions with a paramater of (name) place the full year and the user's github name into the license text. 
 
 // Apache License 2.0
 const generateLicense1 = () => {
@@ -3360,6 +3366,7 @@ For more information, please refer to <https://unlicense.org>
 `
 };
 
+// Exports all functions
 module.exports = {
     generateLicense1, 
     generateLicense2, 
